@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default probootstrap-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" (click)="home()" title="SeedLinked" href="javascript:void(0);"><span style="color:brown;">Seed</span><span style="color:green;">Linked</span></a>
+    </div>
+
+    <div id="navbar-collapse" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" [routerLink]="['/sellyourseed']">Sell your seed</a></li>
+        <li><a href="#" [routerLink]="['/collaboration']">Collaboration</a></li>
+        <li><a href="#" [routerLink]="['/whatwedo']">What we do</a></li>
+        <li><a href="#" [routerLink]="['/whoweare']">Who we are</a></li>
+        <li><a href="#" [routerLink]="['/joinus']">Join Us</a></li>
+        <!--<li><a [routerLink]="['/dashboard']">About Dashboard</a></li>-->
+        <li><a [routerLink]="['/login']">Login</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

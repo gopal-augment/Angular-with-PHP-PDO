@@ -1,0 +1,146 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="" [ngClass]="{'active': activateTab==='listusers'}">
+            <a href="#listusers" data-toggle="tab" (click)="resetAlertForm(); resetFormValues(uf);">List Users</a>
+          </li>
+          <li class="" [ngClass]="{'active': activateTab==='addusers'}">
+            <a href="#addusers" data-toggle="tab" (click)="resetAlertForm(); resetFormValues(uf);">Add/Edit Users</a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+          <div class="tab-pane fade in" [ngClass]="{'active': activateTab==='listusers'}" id="listusers">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email Id</th>
+                  <th>Role</th>
+                  <th>Added Date(m-d-Y)</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="success" *ngFor="let userList of adminUserList; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{userList.firstName}}</td>
+                  <td>{{userList.lastName}}</td>
+                  <td>{{userList.emailId}}</td>
+                  <td>{{userList.userRole}}</td>
+                  <td>{{userList.addedDate}}</td>
+                  <td>
+                    <a class="btn btn-primary btn-sm" href="javascript:void(0)" (click)="editAdminUser(userList.userID)"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-success btn-sm" href="javascript:void(0)" (click)="viewAdminUser(userList.userID)"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-danger btn-sm" href="javascript:void(0)" (click)="deleteAdminUser(userList.userID)"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="tab-pane fade in" [ngClass]="{'active': activateTab==='addusers'}" id="addusers">
+            <div class="row mt20">
+              <div class="col-md-5 col-sm-5 col-xs-6 col-md-offset-3">
+                <form name="addUsersForm" (ngSubmit)="(uf.form.valid && addAdminUsers(uf))" #uf="ngForm" novalidate class="probootstrap-form">
+
+                  <input type="hidden" class="form-control" name="userID" id="userID" [(ngModel)]="usermodel.userID" #userID="ngModel" value="{{usermodel.userID}}">
+
+                  <div class="form-group" [ngClass]="{ 'has-error': uf.submitted && !userFirstName.valid }">
+                    <label for="userFirstName">First Name:</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="userFirstName" id="userFirstName" [(ngModel)]="usermodel.userFirstName" #userFirstName="ngModel" required value="{{usermodel.userFirstName}}">
+                    <div *ngIf="uf.submitted && !userFirstName.valid" class="help-block">First Name is required</div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{ 'has-error': uf.submitted && !userLastName.valid }">
+                    <label for="userLastName">Last Name:</label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="userLastName" id="userLastName" [(ngModel)]="usermodel.userLastName" #userLastName="ngModel" required value="{{usermodel.userLastName}}">
+                    <div *ngIf="uf.submitted && !userLastName.valid" class="help-block">Last Name is required</div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{ 'has-error': uf.submitted && !userEmailId.valid }">
+                    <label for="userEmailId">Email Id:</label>
+                    <input type="email" class="form-control" placeholder="Email Id" name="userEmailId" id="userEmailId" [(ngModel)]="usermodel.userEmailId" #userEmailId="ngModel" required  email="true" (blur)="checkUserEmailExist($event.target)" value="{{usermodel.userEmailId}}">
+                    <div *ngIf="uf.submitted && !userEmailId.valid" class="help-block">Email Id is required</div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{ 'has-error': uf.submitted && !userRole.valid }">
+                    <label for="userRole">User Role:</label>
+                    <select class="form-control" name="userRole" id="userRole" [(ngModel)]="usermodel.userRole" #userRole="ngModel" required >
+                      <option value="">Select Role</option>
+                      <option *ngFor="let userRole of adminUserRole;" value="{{userRole.roleId}}" [selected]="userRole.roleId === usermodel.userRole">{{userRole.roleName}}</option>
+                    </select>
+                    <div *ngIf="uf.submitted && !userRole.valid" class="help-block">User Role is required</div>
+                  </div>
+
+                  <div class="form-group">
+                    <button *ngIf="newUserAdd" [disabled]="loading" class="btn btn-primary" value="add">Add</button>
+                    <button *ngIf="existUserEdit" [disabled]="loading" class="btn btn-success" value="edit">Update</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                  </div>
+                  <app-alert></app-alert>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.panel -->
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+<!-- VIEW ADMIN USER DETAIL Modal-->
+<div class="modal fade" id="viewAdminUserDetail" #viewAdminUserDetail tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="exampleModalLabel"><b>View User Details:</b></span>
+        <button class="close" type="button" (click)="closeViewAdminUser()" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+              <table class="table modal-table">
+                <tbody>
+                <tr>
+                  <td><label>First Name</label></td><td>:</td><td>{{printAdminUserDetail.firstName}}</td>
+                </tr>
+                <tr>
+                  <td><label>Last Name</label></td><td>:</td><td>{{printAdminUserDetail.lastName}}</td>
+                </tr>
+                <tr>
+                  <td><label>Email Id</label></td><td>:</td><td>{{printAdminUserDetail.emailId}}</td>
+                </tr>
+                <tr>
+                  <td><label>Role</label></td><td>:</td><td>{{printAdminUserDetail.userTypeRole}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="closeViewAdminUser()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div [style.display]="loading ? 'block' : 'none'" class="seed-loading-div"><div class="seed-loading-text"></div></div>

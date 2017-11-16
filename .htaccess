@@ -1,0 +1,10 @@
+Header set Access-Control-Allow-Origin "http://localhost:4200"
+Header set Access-Control-Allow-Credentials "true"
+Header set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
+Header set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+#
+RewriteEngine on
+RewriteRule ^_api/?$ api/Api.php?request=$1 [NC]
+RewriteRule ^_api/(.*)?$ api/Api.php?request=$1 [NC]
+#RewriteCond %{REQUEST_METHOD} OPTIONS
+#RewriteRule ^(.*)$ * [QSA,L]

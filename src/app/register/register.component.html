@@ -1,0 +1,54 @@
+<section class="probootstrap-section probootstrap-bg-light" data-section="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <form name="regForm" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate class="probootstrap-form">
+            <h2 class="text-black mt0">Register</h2>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userEmail.valid }">
+              <label for="userFirstName">First Name:</label>
+              <input type="text" class="form-control" placeholder="First Name" name="userFirstName" id="userFirstName" [(ngModel)]="model.userFirstName" #userFirstName="ngModel" required >
+              <div *ngIf="f.submitted && !userFirstName.valid" class="help-block">First Name is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userEmail.valid }">
+              <label for="userLastName">Last Name:</label>
+              <input type="text" class="form-control" placeholder="Last Name" name="userLastName" id="userLastName" [(ngModel)]="model.userLastName" #userLastName="ngModel" required>
+              <div *ngIf="f.submitted && !userLastName.valid" class="help-block">Last Name is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userType.valid }">
+              <label for="userTypeGF">Type:</label>
+              <label for="userTypeGF" class="radio-inline">
+                <input type="radio" name="userType" id="userTypeGF" value="gf" [(ngModel)]="model.userType" #userType="ngModel" required>
+                Gardener/Farmer
+              </label>
+              <label for="userTypeSG" class="radio-inline">
+                <input type="radio" name="userType" id="userTypeSG" value="bs" [(ngModel)]="model.userType" required>
+                Breeder/Seed Grower
+              </label>
+              <div *ngIf="f.submitted && !userType.valid" class="help-block">Type is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userEmail.valid }">
+              <label for="userEmail">Email:</label>
+              <input type="email" class="form-control" placeholder="Email Id" name="userEmail" id="userEmail" [(ngModel)]="model.userEmail" #userEmail="ngModel" required email="true" (blur)="checkEmailExist($event.target)">
+              <div *ngIf="f.submitted && !userEmail.valid" class="help-block">Email is required/invalid</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userPassword.valid }">
+              <label for="userPassword">Password:</label>
+              <input type="password" class="form-control" placeholder="*******" name="userPassword" id="userPassword" [(ngModel)]="model.userPassword" #userPassword="ngModel" required >
+              <div *ngIf="f.submitted && !userPassword.valid" class="help-block">Password is required</div>
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary" value="register">Register</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+            <app-alert></app-alert>
+          </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

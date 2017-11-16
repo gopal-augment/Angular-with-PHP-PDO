@@ -1,0 +1,9 @@
+@import url("../../assets/fe/css/styles_merged.css");
+
+@import url("../../assets/fe/css/style.min.css");
+
+@import url("../../assets/fe/fonts/icomoon/style.css");
+
+.h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small{
+    font-size: 59% !important;
+}

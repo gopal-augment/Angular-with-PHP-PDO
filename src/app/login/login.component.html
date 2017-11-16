@@ -1,0 +1,49 @@
+<section class="probootstrap-section probootstrap-bg-light" data-section="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <form name="loginForm" (ngSubmit)="lf.form.valid && login()" #lf="ngForm" novalidate  class="probootstrap-form">
+            <h2 class="text-black mt0">Login</h2>
+
+            <div class="form-group text-center" [ngClass]="{ 'has-error': lf.submitted && !userRole.valid }">
+              <label for="userRoleA"></label>
+              <label for="userRoleA" class="radio-inline">
+                <input type="radio" name="userRole" id="userRoleA" value="admin" [(ngModel)]="model.userRole" #userRole="ngModel" required>
+                Admin
+              </label>
+              <label for="userRoleU" class="radio-inline">
+                <input type="radio" name="userRole" id="userRoleU" value="user" [(ngModel)]="model.userRole" required>
+                User
+              </label>
+              <div *ngIf="lf.submitted && !userRole.valid" class="help-block">Select user role</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': lf.submitted && !username.valid }">
+              <label for="username">Username:</label>
+              <input type="email" class="form-control" placeholder="Username" name="username" id="username" [(ngModel)]="model.username" #username="ngModel" required >
+              <div *ngIf="lf.submitted && !username.valid" class="help-block">Username is required.</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': lf.submitted && !password.valid }">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" placeholder="*******" name="password" id="password" [(ngModel)]="model.password" #password="ngModel" required >
+              <div *ngIf="lf.submitted && !password.valid" class="help-block">Password is required.</div>
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary" value="login">Login</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              <a [routerLink]="['/joinus']" class="pull-right btn-success btn-sm">Register</a>
+            </div>
+            <app-alert></app-alert>
+
+          </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

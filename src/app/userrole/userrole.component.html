@@ -1,0 +1,125 @@
+<div class="column col-lg-10 col-xs-11" id="main">
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs">
+            <li class="" [ngClass]="{'active': activateTab==='listuserrole'}">
+              <a href="#listuserrole" data-toggle="tab" (click)="resetAlertForm(); resetFormValues(urf); resetTabActiveList();">List User Roles</a>
+            </li>
+            <li class="" [ngClass]="{'active': activateTab==='adduserrole'}">
+              <a href="#adduserrole" data-toggle="tab" (click)="resetAlertForm(); resetFormValues(urf); resetTabActiveAdd();">Add/Edit User Roles</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <div class="tab-pane fade in" [ngClass]="{'active': activateTab==='listuserrole'}" id="listuserrole">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Role Name</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="success" *ngFor="let roleList of adminUserRoleList; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{roleList.roleName}}</td>
+                    <td>
+                      <a class="btn btn-primary btn-sm" href="javascript:void(0)" (click)="editAdminUserRole(roleList.roleId)"><i class="fa fa-pencil"></i></a>
+                      <a class="btn btn-success btn-sm" href="javascript:void(0)" (click)="viewAdminUserRole(roleList.roleId)"><i class="fa fa-eye"></i></a>
+                      <a class="btn btn-danger btn-sm" href="javascript:void(0)" (click)="deleteAdminUserRole(roleList.roleId)"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="tab-pane fade in" [ngClass]="{'active': activateTab==='adduserrole'}" id="adduserrole">
+              <div class="row mt20">
+                <div class="col-md-5 col-sm-5 col-xs-6 col-md-offset-3">
+                  <form name="addUsersForm" (ngSubmit)="(urf.form.valid && addAdminUserRole(urf))" #urf="ngForm" novalidate class="probootstrap-form">
+
+                    <input type="hidden" class="form-control" name="roleId" id="roleId" [(ngModel)]="userrolemodel.roleId" #roleId="ngModel" value="{{userrolemodel.roleId}}">
+
+                    <div class="form-group" [ngClass]="{ 'has-error': urf.submitted && !userRoleName.valid }">
+                      <label for="userRoleName">Role Name:</label>
+                      <input type="text" class="form-control" placeholder="Role Name" name="userRoleName" id="userRoleName" [(ngModel)]="userrolemodel.userRoleName" #userRoleName="ngModel" required value="{{userrolemodel.roleName}}">
+                      <div *ngIf="urf.submitted && !userRoleName.valid" class="help-block">First Name is required</div>
+                    </div>
+
+                    <div class="checkbox" *ngFor="let option of accessOptions">
+                      <label>
+                        <input type="checkbox"
+                               name="options"
+                               value="{{option.value}}"
+                               [checked]="(setAccessEditOptions.indexOf(option.value) >= '0' || (option.checked && setAccessEditOptions.length == 0)) ? true : false"
+                               (change)="onChangeAccess(option.value, $event.target.checked)"
+                        />
+                        {{option.name}}=>{{setAccessEditOptions.indexOf(option.value)}}=>{{option.checked}}
+                      </label>
+                    </div>
+
+
+                    <div class="form-group">
+                      <button *ngIf="newUserRoleAdd" [disabled]="disableFormBtn" class="btn btn-primary" value="add">Add</button>
+                      <button *ngIf="existUserRoleEdit" [disabled]="disableFormBtn" class="btn btn-success" value="edit">Update</button>
+                      <button (click)="resetTabActiveList();" class="btn btn-default" value="cancel">Cancel</button>
+                    </div>
+                    <app-alert></app-alert>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.panel -->
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /#page-wrapper -->
+</div>
+
+
+<!-- VIEW ADMIN USER DETAIL Modal-->
+<div class="modal fade" id="viewAdminUserDetail" #viewAdminUserDetail tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="exampleModalLabel"><b>View User Details:</b></span>
+        <button class="close" type="button" (click)="closeViewAdminUserRole()" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+              <table class="table modal-table">
+                <tbody>
+                <tr>
+                  <td><label>Role Name</label></td><td>:</td><td>{{printAdminUserRoleDetail.roleName}}</td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="closeViewAdminUserRole()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div [style.display]="loading ? 'block' : 'none'" class="seed-loading-div"><div class="seed-loading-text"></div></div>
