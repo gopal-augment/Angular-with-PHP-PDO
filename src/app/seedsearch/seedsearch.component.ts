@@ -11,6 +11,7 @@ import { AlertService, UserService, AuthenticationService } from '../_services/i
   encapsulation: ViewEncapsulation.None
 })
 export class SeedsearchComponent implements OnInit {
+    searchmodel: any = {};
 
   constructor(public router: Router,
               public http: Http,

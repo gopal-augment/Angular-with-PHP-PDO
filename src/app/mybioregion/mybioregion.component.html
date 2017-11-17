@@ -1,0 +1,89 @@
+<div class="column col-lg-10 col-xs-11" id="main">
+  <div id="page-wrapper">
+
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-9 col-md-8">
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#mybioregion" data-toggle="tab">My Bioregion</a>
+            </li>
+            <li class=""><a href="#newbioregion" data-toggle="tab">New Bioregion</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="mybioregion">
+              <!--<agm-map style="height: 475px" [latitude]="51.673858" [longitude]="7.815982">-->
+                <!--<agm-marker [latitude]="51.673858" [longitude]="7.815982">-->
+                  <!--<agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">-->
+                    <!--<ng-template>-->
+                      <!--My first Snazzy Info Window!-->
+                    <!--</ng-template>-->
+                  <!--</agm-snazzy-info-window>-->
+                <!--</agm-marker>-->
+              <!--</agm-map>-->
+              <div class="mt20">
+                <form name="uploadForm" (ngSubmit)="(brf.form.valid && upload(brf))" #brf="ngForm" novalidate class="probootstrap-form">
+
+                  <div class="form-group" [ngClass]="{ 'has-error': brf.submitted && !bioRegionName.valid }">
+                    <label for="bioRegionName">Bio Region Name:</label>
+                    <input type="text" class="form-control" placeholder="bioRegion Name" name="bioRegionName" id="bioRegionName" [(ngModel)]="bioRegionModel.bioRegionName" #bioRegionName="ngModel" required>
+                    <div *ngIf="brf.submitted && !bioRegionName.valid" class="help-block">bioRegion Name is required</div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{ 'has-error': brf.submitted && !searchLocation.valid }">
+                    <label for="searchLocation">Bio Region Location Name:</label>
+                    <input placeholder="Type/Ssearch for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchLocation" name="searchLocation" id="searchLocation" [(ngModel)]="bioRegionModel.searchLocation">
+                    <div *ngIf="brf.submitted && !searchLocation.valid" class="help-block">Bio Region Location Name is required</div>
+                  </div>
+
+                  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)">
+
+                    </agm-marker>
+                  </agm-map>
+
+                </form>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="newbioregion">
+              <h4>myreviews Tab</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
+        </div>
+        <!-- /.panel -->
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <div class="panel-body">
+          <!-- Nav tabs -->
+          <ul class="nav">
+          </ul>
+        </div>
+        <div class="col-lg-12 my-weather-forecast">
+          <h4> My weather forecast</h4>
+
+        </div>
+        <div class="col-lg-12 my-moon-calendar">
+          <h4> My moon calendar</h4>
+
+        </div>
+        <div class="col-lg-12 my-bio-region-alert">
+          <h4> My alert</h4>
+
+        </div>
+        <div class="col-lg-12 my-weather-history">
+          <h4> My weather history</h4>
+
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /#page-wrapper -->
+</div>

@@ -19,6 +19,7 @@ import { MyfarmComponent } from './myfarm/myfarm.component';
 import { UsersComponent } from './users/users.component';
 import { UserroleComponent } from './userrole/userrole.component';
 import { SeedsearchComponent } from './seedsearch/seedsearch.component';
+import { MybioregionComponent } from './mybioregion/mybioregion.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 export const AppRoutes: any = [
@@ -112,6 +113,14 @@ export const AppRoutes: any = [
         { path: 'seed-search' , component: BeheaderComponent, outlet: 'feheader' },
         { path: 'seed-search' , component: BefooterComponent, outlet: 'fefooter' },
         { path: '', component: SeedsearchComponent },
+        { path: '' , component: BeheaderComponent, outlet: 'feheader' },
+        { path: '' , component: BefooterComponent, outlet: 'fefooter' }
+    ]},
+    { path: 'my-bio-region', children: [
+        { path: 'my-bio-region', component: MybioregionComponent },
+        { path: 'my-bio-region' , component: BeheaderComponent, outlet: 'feheader' },
+        { path: 'my-bio-region' , component: BefooterComponent, outlet: 'fefooter' },
+        { path: '', component: MybioregionComponent },
         { path: '' , component: BeheaderComponent, outlet: 'feheader' },
         { path: '' , component: BefooterComponent, outlet: 'fefooter' }
     ]},

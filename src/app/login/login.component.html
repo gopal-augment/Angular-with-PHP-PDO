@@ -9,14 +9,13 @@
             <h2 class="text-black mt0">Login</h2>
 
             <div class="form-group text-center" [ngClass]="{ 'has-error': lf.submitted && !userRole.valid }">
-              <label for="userRoleA"></label>
               <label for="userRoleA" class="radio-inline">
                 <input type="radio" name="userRole" id="userRoleA" value="admin" [(ngModel)]="model.userRole" #userRole="ngModel" required>
-                Admin
+                <span style="font-weight: 600;">Admin</span>
               </label>
               <label for="userRoleU" class="radio-inline">
                 <input type="radio" name="userRole" id="userRoleU" value="user" [(ngModel)]="model.userRole" required>
-                User
+                <span style="font-weight: 600;">User</span>
               </label>
               <div *ngIf="lf.submitted && !userRole.valid" class="help-block">Select user role</div>
             </div>

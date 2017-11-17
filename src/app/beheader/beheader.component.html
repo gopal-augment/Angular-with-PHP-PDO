@@ -83,8 +83,8 @@
             <i class="fa fa-fire" aria-hidden="true"></i>&nbsp;&nbsp;<span class="collapse in hidden-xs"> My Farm</span></a>
         </li>
         <li>
-          <a href="#" class="menu-icon">
-            <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;<span class="collapse in hidden-xs">Review</span></a>
+          <a [routerLink]="['/my-bio-region']" class="menu-icon" *ngIf="isAuthenticate('mybioregion');">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<span class="collapse in hidden-xs"> My Bioregion</span></a>
         </li>
         <li>
           <a [routerLink]="['/seed-search']"  class="menu-icon" *ngIf="isAuthenticate('seedsearch');">

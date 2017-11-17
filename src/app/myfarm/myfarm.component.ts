@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import * as $ from 'jquery';
 import { MyfarmService } from '../_services/myfarm.service';
 import { AlertService, UserService, AuthenticationService } from '../_services/index';
+import { GlobalVariable } from '../GlobalConfig';
 
 @Component({
   selector: 'app-myfarm',
@@ -13,6 +14,7 @@ import { AlertService, UserService, AuthenticationService } from '../_services/i
   encapsulation: ViewEncapsulation.None
 })
 export class MyfarmComponent implements OnInit {
+    baseApiUrl = GlobalVariable.BASE_API_URL;
   @ViewChild('fileInput') fileInput;
   @ViewChild('aboutFile') aboutFile;
   uploadFileModel: any = {};

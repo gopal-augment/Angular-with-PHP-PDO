@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular-4-data-table';
+import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 import { AppRouting } from './app.routing';
 
@@ -35,6 +37,7 @@ import { SeedsearchComponent } from './seedsearch/seedsearch.component';
 import { GuardComponent } from './guard/guard.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { UserroleComponent } from './userrole/userrole.component';
+import { MybioregionComponent } from './mybioregion/mybioregion.component';
 
 
 @NgModule({
@@ -59,10 +62,16 @@ import { UserroleComponent } from './userrole/userrole.component';
     SeedsearchComponent,
     GuardComponent,
     UnauthorizedComponent,
-    UserroleComponent
+    UserroleComponent,
+    MybioregionComponent
   ],
   imports: [
-    BrowserModule, AppRouting, FormsModule, ReactiveFormsModule, HttpModule, CommonModule
+    BrowserModule, AppRouting, FormsModule, ReactiveFormsModule, HttpModule, CommonModule,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyA70zIij1L5UUa-_9O-90gU0QK3rYM4DEQ',
+          libraries: [ 'places' ]
+      }),
+      AgmSnazzyInfoWindowModule
   ],
   providers: [
     HeaderMenuService,

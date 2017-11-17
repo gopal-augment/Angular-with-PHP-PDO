@@ -480,3 +480,12 @@ body.loading-indicator
 body.loading-indicator .seed-loading-div {
   display: block;
 }
+.my-weather-forecast, .my-bio-region-alert{
+  background-color: #689CF0;
+}
+.my-moon-calendar, .my-weather-history{
+  background-color: #CCCCCC;
+}
+#menu{
+  /*min-width: 200px !important;*/
+}

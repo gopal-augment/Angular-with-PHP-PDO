@@ -1,5 +1,8 @@
 <?php
 //error_reporting(0);
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 require_once("rest.inc.php");
 
 class API extends REST {
