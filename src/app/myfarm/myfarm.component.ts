@@ -15,6 +15,7 @@ import { GlobalVariable } from '../GlobalConfig';
 })
 export class MyfarmComponent implements OnInit {
     baseApiUrl = GlobalVariable.BASE_API_URL;
+    baseFolderUrl = GlobalVariable.BASE_FOLDER_URL;
   @ViewChild('fileInput') fileInput;
   @ViewChild('aboutFile') aboutFile;
   uploadFileModel: any = {};

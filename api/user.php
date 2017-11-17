@@ -459,7 +459,7 @@
             $delResult = $parent->db->exec($delUserDetail);
 
             $getUserDetail = "SELECT ur.ur_name AS roleName, ur.ur_id AS roleId FROM ".$parent->prefix."user_roles ur WHERE ur.ur_created_by = ".$userId;
-            echo $getUserDetail;die;
+//            echo $getUserDetail;die;
             $userResult = $parent->db->query($getUserDetail);
             $arr = $userResult->fetchAll(PDO::FETCH_OBJ);
             $parent->response(array('response'=>'success','items'=>$arr), 200);

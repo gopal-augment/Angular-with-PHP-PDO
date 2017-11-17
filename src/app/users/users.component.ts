@@ -156,5 +156,11 @@ export class UsersComponent implements OnInit {
   resetFormValues(form: NgForm){
       form.resetForm('');
   }
+    resetTabActiveAdd() {
+        this.activateTab = 'addusers';
+    }
+    resetTabActiveList() {
+        this.activateTab = 'listusers';
+    }
 }
 

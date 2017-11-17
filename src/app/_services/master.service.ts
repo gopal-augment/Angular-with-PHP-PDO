@@ -7,11 +7,12 @@ import 'rxjs/Rx';
 @Injectable()
 export class MasterService {
     public baseApiUrl = GlobalVariable.BASE_API_URL;
+    public baseFolderUrl = GlobalVariable.BASE_FOLDER_URL;
     constructor(private http: Http,
                 private jwtService: JwtService) { }
 
     getMenuList() {
-        return this.http.get(this.baseApiUrl + 'angular/angular1/_api/master/getMenuList', this.jwtService.jwt())
+        return this.http.get(this.baseApiUrl + this.baseFolderUrl + '_api/master/getMenuList', this.jwtService.jwt())
             .share()
             .map(
                 (response: Response) => response.json()

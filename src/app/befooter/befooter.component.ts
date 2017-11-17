@@ -14,14 +14,13 @@ export class BefooterComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
-      this.addJsScript('../../assets/be/vendor/jquery/jquery.min.js');
-      this.addJsScript('../../assets/be/vendor/bootstrap/js/bootstrap.min.js');
-      this.addJsScript('../../assets/be/vendor/metisMenu/metisMenu.min.js');
-      this.addJsScript('../../assets/be/dist/js/sb-admin-2.js');
+      this.addJsScript('../../assets/be/js/jquery-2.1.4.min.js');
+      this.addJsScript('../../assets/be/js/bootstrap.min.js');
+      this.addJsScript('../../assets/be/js/plugins/pace.min.js');
+      this.addJsScript('../../assets/be/js/main.js');
       // Datatable
-      // this.addJsScript('../../assets/be/vendor/datatables/js/jquery.dataTables.min.js');
-      // this.addJsScript('../../assets/be/vendor/datatables-plugins/dataTables.bootstrap.min.js');
-      // this.addJsScript('../../assets/be/vendor/datatables-responsive/dataTables.responsive.js');
+      // this.addJsScript('../../assets/be/js/plugins/jquery.dataTables.min.js');
+      // this.addJsScript('../../assets/be/js/plugins/dataTables.bootstrap.min.js');
   }
 
   addJsScript(url){
