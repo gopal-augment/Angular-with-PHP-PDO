@@ -96,6 +96,23 @@ class API extends REST {
             }
         }
     }
+
+    public function mybioregion() {
+        require_once("mybioregion.php");
+        if ($this->params != NULL) {
+            switch ($this->params[0]) {
+                case 'saveMyBioRegion':
+                case 'getAllBioRegion':
+                case 'deleteMyBioRegion':
+                    $this->params[0]($this);
+                    break;
+                default:
+                    $this->response(array('response' => 'failed'), 404);
+                    break;
+            }
+        }
+    }
+
     public function user() {
         require_once("user.php");
         if ($this->params != NULL) {

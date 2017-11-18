@@ -93,12 +93,14 @@ $(function () {
 					checkElement.addClass('menu-open');
 					parent.find('li.active').removeClass('active');
 					parent_li.addClass('active');
-				});
+                });
 			}
 			//if this isn't a link, prevent the page from being redirected
 			if (checkElement.is('.treeview-menu')) {
 				e.preventDefault();
 			}
+            $(this).off('click');
+            e.stopImmediatePropagation();
 		});
 
 		//open parent menus when child item is active

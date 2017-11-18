@@ -15,6 +15,7 @@ import { FooterMenuService } from './_services/footerMenu.service';
 import { JwtService } from './_services/jwt.service';
 import { MyfarmService } from './_services/myfarm.service';
 import { MasterService } from './_services/master.service';
+import { MybioregionService } from './_services/mybioregion.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -81,7 +82,8 @@ import { MybioregionComponent } from './mybioregion/mybioregion.component';
     UserService,
     JwtService,
     MyfarmService,
-    MasterService],
+    MasterService,
+    MybioregionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

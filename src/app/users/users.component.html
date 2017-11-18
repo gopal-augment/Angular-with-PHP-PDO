@@ -22,6 +22,7 @@
 
                     <div class="col-md-12">
                         <!--<h3 class="card-title">Table Hover</h3>-->
+                      <br>
                         <table class="table table-hover">
                           <thead>
                           <tr>
@@ -58,6 +59,7 @@
 
                     <div class="col-md-12">
                       <div class="card1">
+                        <br>
                         <!--<h3 class="card-title">Register</h3>-->
                         <form name="addUsersForm" (ngSubmit)="(uf.form.valid && addAdminUsers(uf))" #uf="ngForm" novalidate class="form-horizontal">
                           <div class="card-body">
@@ -104,7 +106,7 @@
                               <div class="col-md-8 col-md-offset-3">
                                 <button class="btn btn-primary icon-btn" *ngIf="newUserAdd" [disabled]="loading" value="add"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
                                 <button class="btn btn-primary icon-btn" *ngIf="existUserEdit" [disabled]="loading" value="edit"><i class="fa fa-fw fa-lg fa-times-circle"></i>Save</button>
-                                &nbsp;&nbsp;&nbsp;<button class="btn btn-default icon-btn" type="button"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
+                                &nbsp;&nbsp;&nbsp;<button class="btn btn-default icon-btn" type="button" (click)="resetTabActiveList();"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
                                 <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                               </div>
                               <app-alert></app-alert>

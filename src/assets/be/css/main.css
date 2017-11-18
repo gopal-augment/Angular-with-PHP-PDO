@@ -322,7 +322,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #e5e5e5;
+  background-color: #FFF; /*e5e5e5*/
 }
 
 input,
@@ -3610,9 +3610,10 @@ tbody.collapse.in {
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  color: #c6c6c6;
-  border-bottom: 2px solid #c6c6c6;
+  color: #353535;
+  border-bottom: 2px solid #353535;
   cursor: default;
+  font-weight: 800;
 }
 
 .nav-pills > li {
@@ -13619,8 +13620,8 @@ be a descendant of the grid when it is being dragged.
 }
 
 .main-header .logo {
-  background-color: #353535;
-  color: #FFF;
+  background-color: #c6c6c6;
+  color: #000;
   border-bottom: 0 solid transparent;
 }
 
@@ -13697,7 +13698,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .fixed .content-wrapper {
-  margin-top: 50px;
+  margin-top: 50px; /*50*/
 }
 
 @media (max-width: 767px) {
@@ -13725,10 +13726,10 @@ be a descendant of the grid when it is being dragged.
 .content-wrapper {
   height: 100%;
   z-index: 800;
-  background-color: #E5E5E5;
-  margin-left: 230px;
+  background-color: #FFFFFF;
+  margin-left: 230px; /*230*/
   z-index: 820;
-  padding: 30px;
+  /*padding: 30px;*/
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -13974,7 +13975,7 @@ be a descendant of the grid when it is being dragged.
   display: block;
   width: 230px;
   height: 50px;
-  font-family: 'Niconne';
+  font-family: 'Open Sans, Arial, sans-serif'; /*Niconne*/
   font-size: 26px;
   font-weight: 400;
   line-height: 50px;
@@ -14086,8 +14087,8 @@ be a descendant of the grid when it is being dragged.
   min-height: 100vh;
   width: 230px;
   z-index: 810;
-  -webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+  /*-webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);*/
   -webkit-transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   -o-transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
@@ -14269,7 +14270,7 @@ be a descendant of the grid when it is being dragged.
 
 @media (min-width: 768px) {
   .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer {
-    margin-left: 50px !important;
+    margin-left: 40px !important; /*50*/
     z-index: 840;
   }
   .sidebar-mini.sidebar-collapse .main-sidebar {
@@ -14459,8 +14460,8 @@ be a descendant of the grid when it is being dragged.
   background: #ffffff;
   border-radius: 3px;
   padding: 20px;
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  /*-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
   margin-bottom: 30px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -14753,7 +14754,7 @@ be a descendant of the grid when it is being dragged.
 
 .toggle-flip input[type="checkbox"] + .flip-indecator:after {
   content: attr(data-toggle-on);
-  background-color: #c6c6c6;
+  background-color: #027525;
   color: #fff;
   -webkit-transform: rotateY(-180deg);
           transform: rotateY(-180deg);
@@ -15576,4 +15577,28 @@ body.loading-indicator .seed-loading-div {
 .columnFooter{
   /*position: absolute;*/
   /*bottom: 0;*/
+}
+
+.treeview-menu a.active{
+  font-weight: 900;
+  margin-left: 10px;
+}
+
+.treeview-menu a.active:after{
+  content: '>' !important;
+  position: absolute;
+  right: 10PX;
+}
+ul.list-region {
+  list-style-type: none;
+  height: 450px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+ul.list-region li {
+  /*border-bottom: #353535;*/
+}
+.display-region{
+  height: 75px;
+  overflow: hidden;
 }

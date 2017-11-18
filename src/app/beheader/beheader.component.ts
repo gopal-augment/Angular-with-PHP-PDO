@@ -62,5 +62,13 @@ export class BeheaderComponent implements OnInit {
       $('.collapse').toggleClass('in').toggleClass('hidden-xs').toggleClass('visible-xs');
       $('#main').toggleClass('column').toggleClass('col-lg-10').toggleClass('col-lg-11 side-hidden');
   }
+
+    isSubMenuActive(subMenu){
+      if('/users' === subMenu){
+          return true;
+      }else if('/user-role' === subMenu){
+          return true;
+      }
+    }
 }
 

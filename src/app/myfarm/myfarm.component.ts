@@ -35,9 +35,9 @@ export class MyfarmComponent implements OnInit {
       if (!this.authenticationService.isAuthenticate('myfarm') ) {
           this.router.navigate(['unauthorized']);
       }
-      this.getAdminUserList();
+      this.getAllGalleryFiles();
   }
-  getAdminUserList() {
+  getAllGalleryFiles() {
     this.loading = true;
     this.myfarmService.getAllGalleryFiles()
         .subscribe(
