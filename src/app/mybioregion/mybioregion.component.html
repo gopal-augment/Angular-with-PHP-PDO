@@ -23,8 +23,10 @@
                         <br>
                         <div class="col-lg-3">
                           <ul class="list-region">
-                            <li *ngFor="let regionList of allBioRegion; let i = index;">
-                              <div class="widget-small primary coloured-icon display-region"><i class="icon fa fa-users fa-3x"></i>
+                            <li *ngFor="let regionList of allBioRegion; let i = index;" (mouseenter) ="mouseEnterListMap(regionList.locLatitude, regionList.locLongitude) "  (mouseleave) ="mouseLeaveListMap(latitudeDefault,longitudeDefault)">
+                              <div class="widget-small primary coloured-icon display-region">
+                                <i class="icon fa fa-map-marker fa-2x">{{regionList.dispLabel}}</i>
+
                                 <div class="info">
                                   <p><b>{{regionList.regionName}}</b></p>
                                   <p>{{regionList.locationAddress}}</p>
@@ -34,13 +36,15 @@
                           </ul>
                         </div>
                         <div class="col-lg-9">
-                          <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
+                          <agm-map [latitude]="latitudeZoom" [longitude]="longitudeZoom"  [scrollwheel]="true" [zoom]="zoom">
                             <agm-marker
                                     *ngFor="let m of markers; let i = index"
                                     [latitude]="m.lat"
                                     [longitude]="m.lng"
                                     [label]="m.label">
+                              <agm-info-window>
                               {{m.title}}
+                              </agm-info-window>
                             </agm-marker>
                           </agm-map>
                         </div>

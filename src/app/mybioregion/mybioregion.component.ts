@@ -18,9 +18,15 @@ declare var google: any;
 export class MybioregionComponent implements OnInit {
     public latitude: any;
     public longitude: any;
+    public latitudeZoom: number;
+    public longitudeZoom: number;
+    public latitudeDefault: number;
+    public longitudeDefault: number;
     public searchLocation: FormControl;
     public zoom: number;
-
+    alphaNumeric: number;
+    alphaLetter: string;
+    alphaNum2: number;
     @ViewChild('search') searchElementRef;
     // public searchElementRef: ElementRef;
 
@@ -31,7 +37,7 @@ export class MybioregionComponent implements OnInit {
     fileInputValidation = false;
     loading = false;
     totalFileCount: any = 0;
-    allBioRegion: any =[];
+    allBioRegion: any = [];
     activateTab = 'mybioregion';
     // markers: any;
     /*********/
@@ -46,7 +52,7 @@ export class MybioregionComponent implements OnInit {
 
     ngOnInit() {
         // set google maps defaults
-        this.zoom = 5;
+        this.zoom = 3;
         this.latitude = 39.8282;
         this.longitude = -98.5795;
 
@@ -59,7 +65,7 @@ export class MybioregionComponent implements OnInit {
         // load Places Autocomplete
         this.mapsAPILoader.load().then(() => {
             let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-                types: ['address']
+                types: ['geocode']
             });
             autocomplete.addListener('place_changed', () => {
                 this.ngZone.run(() => {
@@ -93,7 +99,6 @@ export class MybioregionComponent implements OnInit {
     }
 
     markerDragEnd(m: Marker, $event: MouseEvent) {
-        // console.log('dragEnd', $event.coords);
         this.getGeoLocation($event.coords.lat, $event.coords.lng);
     }
 
@@ -109,8 +114,6 @@ export class MybioregionComponent implements OnInit {
                     let rsltAdrComponent = result.address_components;
                     let resultLength = rsltAdrComponent.length;
                     if (result != null) {
-                        // this.Marker.buildingNum = rsltAdrComponent[resultLength-8].short_name;
-                        // this.marker.streetName = rsltAdrComponent[resultLength-7].short_name;
                         this.bioRegionModel['searchLocation'] = result.formatted_address;
                         this.latitude = lat;
                         this.longitude = lng;
@@ -143,29 +146,74 @@ export class MybioregionComponent implements OnInit {
     }
     /******************************************************************************************/
 
+
+    markers: Marker[] = [];
+
     getAllBioRegion() {
+        this.markers = [];
         this.loading = true;
         this.mybioregionService.getAllBioRegion()
             .subscribe(
                 data => {
                     this.allBioRegion = data.items;
+                    var dynamicLat = this.latitude;
+                    var dynamicLong = this.longitude;
+                    var sumlat =0;
+                    var sumlng = 0;
+                    var i = 1;
                     for (let region of this.allBioRegion) {
+                        var markerLabel = this.getNameFromNumber(i);
                         this.markers.push({
-                            lat: region.locLatitude,
-                            lng: region.locLongitude,
-                            label: region.regionName,
-                            draggable: true,
-                            title: region.locationAddress
+                            lat: Number(region.locLatitude),
+                            lng: Number(region.locLongitude),
+                            label: markerLabel,
+                            draggable: false,
+                            title: String(region.locationAddress)
                         });
 
+                        dynamicLat = region.locLatitude;
+                        dynamicLong = region.locLongitude;
+                        this.allBioRegion[ i - 1 ]['dispLabel'] = markerLabel;
+                        sumlat = sumlat + parseFloat(region.locLatitude);
+                        sumlng = sumlng + parseFloat(region.locLongitude);
+                        i++;
                     }
-                    console.log(this.markers);
+                    this.latitude = dynamicLat;
+                    this.longitude = dynamicLong;
+
+                    this.zoom = 6;
+                    this.latitudeZoom = this.latitudeDefault = (sumlat / ( i - 1 ));
+                    this.longitudeZoom = this.longitudeDefault = (sumlng / ( i - 1 ));
                     this.loading = false;
                 },
                 error => {
                     this.loading = false;
                 });
     }
+
+    /******GET NAME FOR NUMBERS******/
+
+    getNameFromNumber($num) {
+        this.alphaNumeric  = ($num - 1) % 26;
+        this.alphaLetter = String.fromCharCode(65 + this.alphaNumeric);
+        this.alphaNum2 = Math.round((($num - 1) / 26));
+        if (this.alphaNum2 > 0) {
+            return this.getNameFromNumber(this.alphaNum2) + this.alphaLetter;
+        } else {
+            return this.alphaLetter;
+        }
+    }
+    mouseEnterListMap(lat, lng) {
+        this.latitudeZoom = parseFloat(lat);
+        this.longitudeZoom = parseFloat(lng);
+        this.zoom = 12;
+    }
+    mouseLeaveListMap(lat, lng) {
+        this.latitudeZoom = lat;
+        this.longitudeZoom = lng;
+        this.zoom = 6;
+    }
+    /********************SAVE MY BIO REGION*************************/
 
     saveMyBioRegion(uploadForm: NgForm) {
         let fileBrowser = this.fileInput.nativeElement;
@@ -180,7 +228,7 @@ export class MybioregionComponent implements OnInit {
                 formData.append('image-' + i, fileBrowser.files[i]);
                 this.totalFileCount = i;
             }
-            if(this.totalFileCount >= 0){
+            if (this.totalFileCount >= 0) {
                 formData.append('totalFileCount', this.totalFileCount);
                 formData.append('latitude', this.latitude);
                 formData.append('longitude', this.longitude);
@@ -188,26 +236,28 @@ export class MybioregionComponent implements OnInit {
                 formData.append('searchLocation', this.bioRegionModel['searchLocation']);
                 this.loading = true;
                 this.mybioregionService.saveMyBioRegion(formData).subscribe(data => {
-                        if(data.response === 'failed'){
+                        if(data.response === 'failed') {
                             this.alertService.error(data.items);
-                        }else{
+                        }else {
                             this.alertService.success('Successfully added your region!', true);
                             uploadForm.resetForm('');
                             this.bioRegionModel['searchLocation'] = '';
                             this.fileInput.nativeElement.value = '';
+                            this.getAllBioRegion();
                             setTimeout(() => {
                                 this.resetAlertForm();
-                            },3000 );
+                                this.resetTabActiveList();
+                            }, 3000 );
                         }
                         this.loading = false;
                     },
                     error => {
                         this.loading = false;
                     });
-            }else{
+            }else {
                 this.fileInputValidation = false;
             }
-        }else{
+        }else {
             this.fileInputValidation = false;
         }
     }
@@ -215,7 +265,7 @@ export class MybioregionComponent implements OnInit {
         this.alertService.error('');
         this.alertService.clearMessage();
     }
-    resetFormValues(form: NgForm){
+    resetFormValues(form: NgForm) {
         form.resetForm('');
         this.bioRegionModel['searchLocation'] = '';
     }
@@ -226,15 +276,6 @@ export class MybioregionComponent implements OnInit {
         this.activateTab = 'mybioregion';
     }
 
-
-    markers: Marker[] = [{
-        lat: 51.673858,
-        lng: 7.815982,
-        label: 'STATIC',
-        draggable: true,
-        title: 'dd'
-    }];
-
 }
 // just an interface for type safety.
 interface Marker {
@@ -244,8 +285,8 @@ interface Marker {
     draggable: boolean;
     title: string;
 }
-
-interface SelectedLocation {
-    lat: number;
-    lng: number;
+interface LatLng {
+    constructor(lat: number, lng: number): void;
+    lat(): number;
+    lng(): number;
 }

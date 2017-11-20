@@ -14967,8 +14967,8 @@ be a descendant of the grid when it is being dragged.
       -ms-flex: 1;
           flex: 1;
   padding-left: 20px;
-  -ms-flex-item-align: center;
-      align-self: center;
+  /*-ms-flex-item-align: center;*/
+      /*align-self: center;*/
 }
 
 .widget-small .info h4 {
@@ -15594,6 +15594,7 @@ ul.list-region {
   height: 450px;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-left: 0px;
 }
 ul.list-region li {
   /*border-bottom: #353535;*/
