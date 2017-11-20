@@ -24,8 +24,9 @@
                         <div class="col-lg-3">
                           <ul class="list-region">
                             <li *ngFor="let regionList of allBioRegion; let i = index;" (mouseenter) ="mouseEnterListMap(regionList.locLatitude, regionList.locLongitude) "  (mouseleave) ="mouseLeaveListMap(latitudeDefault,longitudeDefault)">
-                              <div class="widget-small primary coloured-icon display-region">
-                                <i class="icon fa fa-map-marker fa-2x">{{regionList.dispLabel}}</i>
+                              <div class="widget-small primary coloured-icon display-region" >
+                                <i class="icon fa fa-map-marker fa-2x" style="color:#F44336;">
+                                  <span style="color:#000;">{{regionList.dispLabel}}</span></i>
 
                                 <div class="info">
                                   <p><b>{{regionList.regionName}}</b></p>
