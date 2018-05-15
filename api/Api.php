@@ -10,7 +10,7 @@ class API extends REST {
     public $data = "";
     public $db = NULL;
     public $params = NULL;
-    public $host = "localhost";
+    public $host = "127.0.0.1";
     public $user = "root";
     public $pass = "";
     public $dbname = "myprojectangular";
@@ -71,7 +71,12 @@ class API extends REST {
         }
 
         if ((int) method_exists($this, $function) > 0) {
-            $this->dbConnect();
+            // try {
+                $this->dbConnect();
+            //     echo 'Connected to database';
+            // } catch(PDOException $e) {
+            //     echo $e->getMessage();
+            // }
             $this->$function();
         } else {
             $this->response(array('response' => 'failed'), 404);    // If the method not exist with in this class, response would be "Page not found".
